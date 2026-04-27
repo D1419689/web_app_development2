@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h4 class="mb-0">{{ '編輯帳戶' if account else '新增帳戶' }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">帳戶名稱 <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ account.name if account else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="initial_balance" class="form-label">初始餘額</label>
+                        <input type="number" step="0.01" class="form-control" id="initial_balance" name="initial_balance" value="{{ account.initial_balance if account else '0.00' }}">
+                        <div class="form-text">如果是信用卡，可輸入 0 或負數作為初始欠款。</div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('account.index') }}" class="btn btn-outline-secondary">取消</a>
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
